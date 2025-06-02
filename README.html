@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>SYSTEM ERROR</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            margin-top: 100px;
+        }
+        h1 {
+            font-size: 50px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .warning {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>⚠ SYSTEM ERROR ⚠</h1>
+    <div class="warning">Virus terdeteksi! Data sedang dihapus...</div>
+    <div id="progress" style="margin-top: 30px; font-size: 18px;"></div>
+    <audio id="scream" src="https://www.myinstants.com/media/sounds/windows-xp-error.mp3" autoplay loop></audio>
+
+    <script>
+        let progress = document.getElementById("progress");
+        let percentage = 0;
+        let interval = setInterval(() => {
+            percentage += Math.floor(Math.random() * 10) + 1;
+            if (percentage > 100) percentage = 100;
+            progress.innerText = `Menghapus file sistem: ${percentage}%`;
+
+            if (percentage === 100) {
+                clearInterval(interval);
+                document.body.innerHTML = "<h1 style='color: red;'>Seluruh data telah dihapus! 💀</h1>";
+                document.body.style.backgroundColor = "black";
+            }
+        }, 500);
+
+        // Mencegah pengguna menutup atau reload
+        window.onbeforeunload = function () {
+            return "Sistem sedang dalam proses penting. Jangan keluar!";
+        };
+
+        // Fullscreen otomatis
+        document.documentElement.requestFullscreen().catch(() => {});
+    </script>
+</body>
+</html>
